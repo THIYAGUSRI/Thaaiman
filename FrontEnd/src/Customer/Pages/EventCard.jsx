@@ -31,18 +31,18 @@ export default function EventCard() {
   };
 
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+    if (!imgPath) return '/uploads/default-image.jpg';
     const normalizedPath = imgPath.replace(/\\/g, '/');
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath}`;
+      : `/uploads/${normalizedPath}`;
   };
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/events');
+        const response = await fetch('/events');
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -122,7 +122,7 @@ export default function EventCard() {
                       alt={eventData.title}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.src = 'http://localhost:3000/uploads/default-image.jpg';
+                        e.target.src = '/uploads/default-image.jpg';
                       }}
                     />
                   </div>

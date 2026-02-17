@@ -37,7 +37,7 @@ export default function DeliveryAddress() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3000/deliveryaddress/${currentUser.user.userID}`);
+      const res = await fetch(`/deliveryaddress/${currentUser.user.userID}`);
       if (!res.ok) throw new Error('Failed to fetch addresses');
       const data = await res.json();
       setDeliveryAddresses(data || []);
@@ -116,7 +116,7 @@ export default function DeliveryAddress() {
         console.log('Updating address ID:', editingAddressId);
         console.log('PUT payload:', payload);
 
-        response = await fetch(`http://localhost:3000/updatedeliveryaddress/${editingAddressId}`, {
+        response = await fetch(`/updatedeliveryaddress/${editingAddressId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -124,7 +124,7 @@ export default function DeliveryAddress() {
       } else {
         // ── CREATE ────────────────────────────────────────
         console.log('Creating new address');
-        response = await fetch('http://localhost:3000/deliveryaddress', {
+        response = await fetch('/deliveryaddress', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -183,7 +183,7 @@ export default function DeliveryAddress() {
     if (!window.confirm('Delete this address?')) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/deliveryaddress/${id}`, {
+      const res = await fetch(`/deliveryaddress/${id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userID: currentUser?.user?.userID }),

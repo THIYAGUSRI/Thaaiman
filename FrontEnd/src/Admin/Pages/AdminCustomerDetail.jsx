@@ -34,7 +34,7 @@ export default function AdminCustomerDetail() {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/users');
+        const response = await fetch('/users');
         const data = await response.json();
         setCustomer(data);
       } catch (error) {

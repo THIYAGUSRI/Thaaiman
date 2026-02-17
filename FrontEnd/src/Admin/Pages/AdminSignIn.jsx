@@ -31,7 +31,7 @@ export default function AdminSignIn() {
     e.preventDefault();
     dispatch(signInStart());
     try {
-      const response = await fetch('http://localhost:3000/adminlogin', {
+      const response = await fetch('/adminlogin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

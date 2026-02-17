@@ -6,7 +6,7 @@ export const fetchWhistlist = createAsyncThunk(
   'whistlist/fetchWhistlist',
   async ({ token, userId }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3000/whistlists/${userId}`, {
+      const response = await fetch(`/whistlists/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -31,7 +31,7 @@ export const addToWhistlist = createAsyncThunk(
     try {
       console.log('Adding to wishlist - userId:', userId, 'productId:', productId);
 
-      const response = await fetch('http://localhost:3000/createwhistlist', {
+      const response = await fetch('/createwhistlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export const removeFromWhistlist = createAsyncThunk(
   'whistlist/removeFromWhistlist',
   async ({ token, userId, itemId }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:3000/deletewhistlist/${itemId}`, {
+      const response = await fetch(`/deletewhistlist/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

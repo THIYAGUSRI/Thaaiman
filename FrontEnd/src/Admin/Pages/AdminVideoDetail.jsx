@@ -30,7 +30,7 @@ export default function AdminVideoDetail() {
         const fetchVideos = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:3000/videodetails');
+                const response = await fetch('/videodetails');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
 
@@ -67,9 +67,9 @@ export default function AdminVideoDetail() {
     }
 
     const getImageUrl = (imgPath) => {
-        if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+        if (!imgPath) return '/uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `/${normalizedPath}`;
     };
 
     const getYouTubeEmbedUrl = (preview) => {
@@ -85,7 +85,7 @@ export default function AdminVideoDetail() {
 
     const handleDelete = (videoId) => {
         // Call API to delete the video
-        fetch(`http://localhost:3000/deletevideodetail/${videoId}`, {
+        fetch(`/deletevideodetail/${videoId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -81,7 +81,7 @@ export default function CommentSection({ videoID }) {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/comments/${videoID}`);
+                const response = await fetch(`/comments/${videoID}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -123,7 +123,7 @@ export default function CommentSection({ videoID }) {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/createcomment', {
+            const response = await fetch('/createcomment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ export default function CommentSection({ videoID }) {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/createcomment', {
+            const response = await fetch('/createcomment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ export default function CommentSection({ videoID }) {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/updatecomment/${id}`, {
+            const response = await fetch(`/updatecomment/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

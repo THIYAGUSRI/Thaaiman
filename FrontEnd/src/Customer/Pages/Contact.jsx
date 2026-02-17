@@ -46,9 +46,9 @@ export default function Contact() {
       };
 
       console.log('Contact.jsx: Sending payload:', payload);
-      console.log('Contact.jsx: API URL:', 'http://localhost:3000/createcontact');
+      console.log('Contact.jsx: API URL:', '/createcontact');
 
-      const res = await fetch('http://localhost:3000/createcontact', {
+      const res = await fetch('/createcontact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

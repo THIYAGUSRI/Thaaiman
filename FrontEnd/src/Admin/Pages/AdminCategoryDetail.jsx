@@ -59,7 +59,7 @@ export default function AdminCategoryDetail() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categorys', {
+        const response = await fetch('/categorys', {
           headers: {
             'Accept': 'application/json',
             'Cache-Control': 'no-cache',
@@ -79,12 +79,12 @@ export default function AdminCategoryDetail() {
   }, []);
 
   const getImageUrl = (imgPath) => {
-    const fallbackImage = 'http://localhost:3000/uploads/no-image.png';
+    const fallbackImage = '/uploads/no-image.png';
     if (!imgPath) return fallbackImage;
     const normalizedPath = imgPath.replace(/\\/g, '/').trim();
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath.replace(/^\/+/, '')}`;
+      : `/uploads/${normalizedPath.replace(/^\/+/, '')}`;
   };
 
   const handleOpenModal = (categoryId) => {
@@ -99,7 +99,7 @@ export default function AdminCategoryDetail() {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/deletecategory/${selectedCategoryId}`, {
+      const response = await fetch(`/deletecategory/${selectedCategoryId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: currentUser?.id }),
@@ -192,7 +192,7 @@ export default function AdminCategoryDetail() {
                               border: '1px solid #e0e0e0',
                             }}
                             onError={(e) => {
-                              e.target.src = 'http://localhost:3000/uploads/no-image.png';
+                              e.target.src = '/uploads/no-image.png';
                             }}
                           />
                         </TableCell>

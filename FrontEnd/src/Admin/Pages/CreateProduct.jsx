@@ -25,7 +25,7 @@ export default function CreateProduct() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categorys');
+        const response = await fetch('/categorys');
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }
@@ -132,7 +132,7 @@ export default function CreateProduct() {
         data.append('images', image);
       });
 
-      const response = await fetch('http://localhost:3000/createproduct', {
+      const response = await fetch('/createproduct', {
         method: 'POST',
         body: data,
       });

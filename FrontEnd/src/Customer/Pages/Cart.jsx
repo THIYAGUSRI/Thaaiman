@@ -108,7 +108,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchDeliveryCentre = async () => {
       try {
-        const response = await fetch('http://localhost:3000/deliverycentres');
+        const response = await fetch('/deliverycentres');
         if (!response.ok) {
           throw new Error('Failed to fetch delivery centres');
         }
@@ -174,7 +174,7 @@ export default function Cart() {
         return;
       }
       try {
-        const response = await fetch(`http://localhost:3000/deliveryaddress/${userId}`);
+        const response = await fetch(`/deliveryaddress/${userId}`);
         if (!response.ok) {
           console.error('Cart.js: Failed to fetch delivery addresses:', response.statusText);
           setDeliveryAddress([]);
@@ -301,7 +301,7 @@ export default function Cart() {
       console.log('Cart.js: Fetching product for rate change due to missing prod_Rate or invalid user cart');
       const fetchProduct = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/product/${prod_ID}`);
+          const res = await fetch(`/product/${prod_ID}`);
           if (res.ok) {
             const product = await res.json();
             const matchedRate = product.prod_Rate.find((rateObj) => Object.keys(rateObj)[0] === selectedKey);
@@ -415,11 +415,11 @@ export default function Cart() {
   };
 
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'http://localhost:3000/Uploads/no-image.png';
+    if (!imgPath) return '/Uploads/no-image.png';
     const normalizedPath = imgPath.replace(/\\/g, '/');
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath}`;
+      : `/uploads/${normalizedPath}`;
   };
 
   if (!currentUser) {

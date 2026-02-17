@@ -15,7 +15,7 @@ export default function AdminEditVideoPage() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/videodetail/${id}`);
+        const response = await fetch(`/videodetail/${id}`);
         if (!response.ok) throw new Error('Failed to fetch video details');
         const data = await response.json();
 
@@ -27,7 +27,7 @@ export default function AdminEditVideoPage() {
         setVideo({ ...data, date: formattedDate });
 
         if (data.thumbnail) {
-          setThumbnailPreview(`http://localhost:3000/${data.thumbnail}`);
+          setThumbnailPreview(`/${data.thumbnail}`);
         }
       } catch (error) {
         setError(error.message || 'An error occurred while fetching video details');
@@ -95,7 +95,7 @@ export default function AdminEditVideoPage() {
         formData.append('thumbnail', video.thumbnail === null ? 'null' : (video.thumbnail || ''));
       }
 
-      const response = await fetch(`http://localhost:3000/updatevideodetail/${id}`, {
+      const response = await fetch(`/updatevideodetail/${id}`, {
         method: 'PUT',
         body: formData
       });
@@ -109,7 +109,7 @@ export default function AdminEditVideoPage() {
       setVideo(updatedVideo);
 
       if (updatedVideo.thumbnail) {
-        setThumbnailPreview(`http://localhost:3000/${updatedVideo.thumbnail}`);
+        setThumbnailPreview(`/${updatedVideo.thumbnail}`);
       } else {
         setThumbnailPreview(null);
       }

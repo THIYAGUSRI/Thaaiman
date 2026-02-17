@@ -92,10 +92,10 @@ export default function WhistList() {
       setLoading(true);
       try {
         const [whistRes, prodRes] = await Promise.all([
-          fetch(`http://localhost:3000/whistlists/${userId}`, {
+          fetch(`/whistlists/${userId}`, {
             headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
           }),
-          fetch('http://localhost:3000/products', {
+          fetch('/products', {
             headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
           }),
         ]);

@@ -36,7 +36,7 @@ export default function AdminEventDetail() {
   useEffect(() => {
     try {
       const fetchEvent = async () => {
-        const response = await fetch('http://localhost:3000/events')
+        const response = await fetch('/events')
         const data = await response.json();
         setEvents(data);
       }
@@ -48,19 +48,19 @@ export default function AdminEventDetail() {
   }, []);
 
   const getImageUrl = (imgPath) => {
-    const fallbackImage = 'http://localhost:3000/uploads/no-image.png';
+    const fallbackImage = '/uploads/no-image.png';
     if (!imgPath) return fallbackImage;
     const normalizedPath = imgPath.replace(/\\/g, '/').trim();
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath.replace(/^\/+/, '')}`;
+      : `/uploads/${normalizedPath.replace(/^\/+/, '')}`;
   };
 
   const handleDelete = (eventId) => {
     // Implement delete functionality here
     console.log(`Delete event with ID: ${eventId}`);
     // Call API to delete the event
-    fetch(`http://localhost:3000/deleteevent/${eventId}`, {
+    fetch(`/deleteevent/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

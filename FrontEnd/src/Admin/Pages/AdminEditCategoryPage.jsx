@@ -17,7 +17,7 @@ export default function AdminEditCategoryPage() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/category/${id}`);
+        const response = await fetch(`/category/${id}`);
         if (response.ok) {
           const data = await response.json();
           setCategory(data);
@@ -50,7 +50,7 @@ export default function AdminEditCategoryPage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/updatecategory/${id}`, {
+      const response = await fetch(`/updatecategory/${id}`, {
         method: 'PUT',
         body: data,
       });
@@ -97,12 +97,12 @@ export default function AdminEditCategoryPage() {
 
   // Generate full URL for existing images
   const getImageUrl = (imgPath) => {
-    const fallbackImage = 'http://localhost:3000/uploads/no-image.png';
+    const fallbackImage = '/uploads/no-image.png';
     if (!imgPath) return fallbackImage;
     const normalizedPath = imgPath.replace(/\\/g, '/').trim();
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath.replace(/^\/+/, '')}`;
+      : `/uploads/${normalizedPath.replace(/^\/+/, '')}`;
   };
 
   return (

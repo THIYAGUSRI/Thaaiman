@@ -38,7 +38,7 @@ export default function DeliverySignIn() {
         dispatch(signInStart());
 
         try {
-            const response = await fetch('http://localhost:3000/deliverycentrelogin', {
+            const response = await fetch('/deliverycentrelogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

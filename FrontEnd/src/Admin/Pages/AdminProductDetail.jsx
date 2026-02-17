@@ -38,7 +38,7 @@ export default function AdminProductDetail() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3000/products', {
+        const response = await fetch('/products', {
           headers: {
             'Accept': 'application/json',
             'Cache-Control': 'no-cache',
@@ -59,12 +59,12 @@ export default function AdminProductDetail() {
   }, []);
 
   const getImageUrl = (imgPath) => {
-    const fallbackImage = 'http://localhost:3000/uploads/no-image.png';
+    const fallbackImage = '/uploads/no-image.png';
     if (!imgPath) return fallbackImage;
     const normalizedPath = imgPath.replace(/\\/g, '/').trim();
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath.replace(/^\/+/, '')}`;
+      : `/uploads/${normalizedPath.replace(/^\/+/, '')}`;
   };
 
   const handleOpenModal = (productId) => {
@@ -79,7 +79,7 @@ export default function AdminProductDetail() {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/productdelete/${selectedProductId}`, {
+      const response = await fetch(`/productdelete/${selectedProductId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function AdminProductDetail() {
                           alt={product.prod_Name || 'Product Image'}
                           style={{ width: '50px', height: '50px', objectFit: 'contain' }}
                           onError={(e) => {
-                            e.target.src = 'http://localhost:3000/uploads/no-image.png';
+                            e.target.src = '/uploads/no-image.png';
                           }}
                         />
                       </TableCell>

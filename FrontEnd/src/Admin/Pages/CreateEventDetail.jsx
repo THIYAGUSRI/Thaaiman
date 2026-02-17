@@ -129,7 +129,7 @@ export default function CreateEventDetail() {
         data.append('images', image);
       });
 
-      const response = await fetch('http://localhost:3000/createevent', {
+      const response = await fetch('/createevent', {
         method: 'POST',
         body: data,
       });

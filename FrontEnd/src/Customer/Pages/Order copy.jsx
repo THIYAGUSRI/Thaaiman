@@ -17,7 +17,7 @@ export default function Order() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3000/orders', {
+      const response = await fetch('/orders', {
         headers: {
           Authorization: `Bearer ${userId}`,
         },
@@ -66,7 +66,7 @@ export default function Order() {
   const confirmDelete = async () => {
     if (!orderToDelete) return;
     try {
-      const response = await fetch(`http://localhost:3000/orders/${orderToDelete}`, {
+      const response = await fetch(`/orders/${orderToDelete}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${userId}`,

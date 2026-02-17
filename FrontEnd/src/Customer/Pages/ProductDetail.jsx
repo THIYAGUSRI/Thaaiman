@@ -61,7 +61,7 @@ export default function ProductDetail() {
     const fetchProduct = async () => {
       try {
         console.log(`ProductDetail.js: Fetching product details for prod_ID: ${id}`);
-        const res = await fetch(`http://localhost:3000/product/${id}`);
+        const res = await fetch(`/product/${id}`);
         if (res.ok) {
           const data = await res.json();
           console.log('ProductDetail.js: Product details fetched:', data);
@@ -73,7 +73,7 @@ export default function ProductDetail() {
             const imagePath = data.prod_Images[0].image.replace(/\\/g, '/');
             const imageUrl = imagePath.startsWith('http')
               ? imagePath
-              : `http://localhost:3000/uploads/${imagePath}`;
+              : `/uploads/${imagePath}`;
             setMainImage(imageUrl);
             console.log('ProductDetail.js: Set main image:', imageUrl);
           }
@@ -162,7 +162,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:3000/products');
+        const res = await fetch('/products');
         if (!res.ok) throw new Error('Failed to fetch products');
         const data = await res.json();
         setProducts(data);
@@ -332,11 +332,11 @@ export default function ProductDetail() {
   };
 
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'http://localhost:3000/uploads/no-image.png';
+    if (!imgPath) return '/uploads/no-image.png';
     const normalizedPath = imgPath.replace(/\\/g, '/');
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath}`;
+      : `/uploads/${normalizedPath}`;
   };
 
   const handleAddToWhistList = async (e) => {

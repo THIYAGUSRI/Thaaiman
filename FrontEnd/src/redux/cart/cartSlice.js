@@ -5,7 +5,7 @@ export const fetchCart = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     console.log(`Fetching cart with token`);
     try {
-      const response = await fetch('http://localhost:3000/cart', {
+      const response = await fetch('/cart', {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       if (!response.ok) {
@@ -50,7 +50,7 @@ export const addToCart = createAsyncThunk(
         console.error('Invalid prod_Rate format:', prod_Rate);
         throw new Error('prod_Rate must be a non-empty array');
       }
-      const response = await fetch('http://localhost:3000/cart/add', {
+      const response = await fetch('/cart/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ userId, prod_ID, quantity, selectedRate, prod_Name, image, prod_Rate }),
@@ -112,7 +112,7 @@ export const updateCartItem = createAsyncThunk(
       
       console.log('Update request body:', requestBody);
       
-      const response = await fetch('http://localhost:3000/cart/update', {
+      const response = await fetch('/cart/update', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json', 
@@ -160,7 +160,7 @@ export const removeFromCart = createAsyncThunk(
         throw new Error('Rate information is required to identify which unit to remove');
       }
       
-      const response = await fetch(`http://localhost:3000/cart/remove/${prod_ID}`, {
+      const response = await fetch(`/cart/remove/${prod_ID}`, {
         method: 'DELETE',
         headers: { 
           'Content-Type': 'application/json', 
@@ -195,7 +195,7 @@ export const createOrder = createAsyncThunk(
       if (!token) {
         throw new Error('Authentication token is required');
       }
-      const response = await fetch('http://localhost:3000/createorder', {
+      const response = await fetch('/createorder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

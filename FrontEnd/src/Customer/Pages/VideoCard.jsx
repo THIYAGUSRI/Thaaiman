@@ -14,7 +14,7 @@ export default function VideoCard() {
         const fetchVideos = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:3000/videodetails');
+                const response = await fetch('/videodetails');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
@@ -55,9 +55,9 @@ export default function VideoCard() {
     }
 
     const getImageUrl = (imgPath) => {
-        if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+        if (!imgPath) return '/uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `/${normalizedPath}`;
     };
 
     const getYouTubeEmbedUrl = (preview) => {

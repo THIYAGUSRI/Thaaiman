@@ -33,7 +33,7 @@ export default function AdminDeliveryCentre() {
   useEffect(() => {
     const fetchDeliveryCentres = async () => {
       try {
-        const response = await fetch('http://localhost:3000/deliverycentres');
+        const response = await fetch('/deliverycentres');
         const data = await response.json();
         setDeliveryCentres(data);
       } catch (error) {

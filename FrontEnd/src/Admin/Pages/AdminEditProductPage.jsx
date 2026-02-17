@@ -30,7 +30,7 @@ export default function AdminEditProductPage() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categorys');
+        const response = await fetch('/categorys');
         if (!response.ok) throw new Error('Failed to fetch categories');
         const data = await response.json();
         setCategories(data);
@@ -41,7 +41,7 @@ export default function AdminEditProductPage() {
 
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/product/${id}`);
+        const response = await fetch(`/product/${id}`);
         if (!response.ok) throw new Error('Failed to fetch product');
         const product = await response.json();
 
@@ -65,7 +65,7 @@ export default function AdminEditProductPage() {
 
         if (product.prod_Images && product.prod_Images.length > 0) {
           setExistingImages(product.prod_Images.map(img => ({
-            url: `http://localhost:3000/uploads/${img.image}`,
+            url: `/uploads/${img.image}`,
             path: img.image,
           })));
         }
@@ -190,7 +190,7 @@ export default function AdminEditProductPage() {
         data.append('images', image);
       });
 
-      const response = await fetch(`http://localhost:3000/updateproduct/${id}`, {
+      const response = await fetch(`/updateproduct/${id}`, {
         method: 'PUT',
         body: data,
       });

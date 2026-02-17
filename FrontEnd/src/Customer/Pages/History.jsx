@@ -18,7 +18,7 @@ export default function History() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3000/orders', {
+      const response = await fetch('/orders', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

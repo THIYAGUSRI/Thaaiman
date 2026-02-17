@@ -29,7 +29,7 @@ export default function Carousel_Slider() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categorys');
+        const response = await fetch('/categorys');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

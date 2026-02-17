@@ -141,7 +141,7 @@ export default function DeliverySignUp() {
             
             const { retypePassword, ...submitData } = formData;
             
-            const response = await fetch('http://localhost:3000/createdeliverycentre', {
+            const response = await fetch('/createdeliverycentre', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(submitData)

@@ -21,7 +21,7 @@ export default function Product() {
         const fetchData = async () => {
             try {
                 // Fetch categories
-                const categoryResponse = await fetch('http://localhost:3000/categorys');
+                const categoryResponse = await fetch('/categorys');
                 if (!categoryResponse.ok) {
                     throw new Error(`Category fetch error: ${categoryResponse.status}`);
                 }
@@ -38,7 +38,7 @@ export default function Product() {
                 console.log('Product.js: Category map:', catMap);
 
                 // Fetch products
-                const productResponse = await fetch('http://localhost:3000/products');
+                const productResponse = await fetch('/products');
                 if (!productResponse.ok) {
                     throw new Error(`Product fetch error: ${productResponse.status}`);
                 }
@@ -85,9 +85,9 @@ export default function Product() {
         });
 
     const getImageUrl = (imgPath) => {
-        if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+        if (!imgPath) return '/uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/uploads/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `/uploads/${normalizedPath}`;
     };
 
     return (

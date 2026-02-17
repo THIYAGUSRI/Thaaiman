@@ -48,7 +48,7 @@ export default function Order() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3000/orders', {
+      const response = await fetch('/orders', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -111,7 +111,7 @@ export default function Order() {
   const confirmCancel = async () => {
     if (!orderToCancel) return;
     try {
-      const response = await fetch(`http://localhost:3000/updateorder/${orderToCancel}`, {
+      const response = await fetch(`/updateorder/${orderToCancel}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -152,11 +152,11 @@ export default function Order() {
   const filteredOrders = orders.filter((order) => order.deliveryProcess === filteredStatus);
 
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'http://localhost:3000/Uploads/no-image.png';
+    if (!imgPath) return '/Uploads/no-image.png';
     const normalizedPath = imgPath.replace(/\\/g, '/');
     return normalizedPath.startsWith('http')
       ? normalizedPath
-      : `http://localhost:3000/uploads/${normalizedPath}`;
+      : `/uploads/${normalizedPath}`;
   };
 
   return (

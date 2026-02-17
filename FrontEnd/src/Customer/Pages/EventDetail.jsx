@@ -38,7 +38,7 @@ export default function EventDetail() {
     useEffect(() => {
         const fetchEventDetail = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/event/${id}`);
+                const response = await fetch(`/event/${id}`);
                 const data = await response.json();
                 setEventDetail(data);
             } catch (error) {
@@ -92,9 +92,9 @@ export default function EventDetail() {
         };
 
         const getImageUrl = (imgPath) => {
-            if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+            if (!imgPath) return '/uploads/default-image.jpg';
             const normalizedPath = imgPath.replace(/\\/g, '/');
-            return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/uploads/${normalizedPath}`;
+            return normalizedPath.startsWith('http') ? normalizedPath : `/uploads/${normalizedPath}`;
         };
 
         return (

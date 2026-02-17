@@ -9,7 +9,7 @@ export default function Category() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:3000/categorys');
+                const response = await fetch('/categorys');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -43,9 +43,9 @@ export default function Category() {
     };
 
     const getImageUrl = (imgPath) => {
-        if (!imgPath) return 'http://localhost:3000/Uploads/default-image.jpg';
+        if (!imgPath) return '/Uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/uploads/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `/uploads/${normalizedPath}`;
     };
 
     const handleCategoryClick = (category) => {
@@ -97,7 +97,7 @@ export default function Category() {
                                         loading="lazy"
                                         onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src = 'http://localhost:3000/Uploads/default-image.jpg';
+                                            e.target.src = '/Uploads/default-image.jpg';
                                         }}
                                     />
                                 </div>

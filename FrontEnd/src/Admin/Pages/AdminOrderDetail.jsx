@@ -34,7 +34,7 @@ export default function AdminOrderDetail() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:3000/admin/orders");
+        const res = await fetch("/admin/orders");
         const data = await res.json();
         setOrders(data);
       } catch (error) {

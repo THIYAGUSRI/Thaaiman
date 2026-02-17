@@ -59,7 +59,7 @@ export default function DeliveryHome() {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/delivery/orders', {
+      const response = await fetch('/delivery/orders', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -108,9 +108,9 @@ export default function DeliveryHome() {
   const filteredOrders = orders.filter(o => o.deliveryProcess === filteredStatus);
 
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'http://localhost:3000/Uploads/no-image.png';
+    if (!imgPath) return '/Uploads/no-image.png';
     const cleanPath = imgPath.replace(/\\/g, '/');
-    return cleanPath.startsWith('http') ? cleanPath : `http://localhost:3000/uploads/${cleanPath}`;
+    return cleanPath.startsWith('http') ? cleanPath : `/uploads/${cleanPath}`;
   };
 
   const openActualQtyModal = (orderId, item) => {
@@ -167,7 +167,7 @@ export default function DeliveryHome() {
 
       console.log(`Frontend: Sending payload for order ${orderId}:`, JSON.stringify(payload, null, 2));
 
-      const res = await fetch(`http://localhost:3000/delivery/updateorder/${orderId}`, {
+      const res = await fetch(`/delivery/updateorder/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ export default function DeliveryHome() {
 
   const handleConfirmedOrder = async (orderId, status) => {
     try {
-      const res = await fetch(`http://localhost:3000/delivery/updateorder/${orderId}`, {
+      const res = await fetch(`/delivery/updateorder/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

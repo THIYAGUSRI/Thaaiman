@@ -20,7 +20,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/user/${id}`);
+        const response = await fetch(`/user/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch user');
         }
@@ -72,7 +72,7 @@ export default function Profile() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/editprofile/${id}`, {
+      const response = await fetch(`/editprofile/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

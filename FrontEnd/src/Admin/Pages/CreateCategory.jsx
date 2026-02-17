@@ -26,7 +26,7 @@ export default function CreateCategory() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/createcategory', {
+      const response = await fetch('/createcategory', {
         method: 'POST',
         body: formData,
         headers: {

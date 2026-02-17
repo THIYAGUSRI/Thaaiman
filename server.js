@@ -27,12 +27,6 @@ dotenv.config();
 const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
-app.use(express.static(path.join(__dirname, 'FrontEnd/dist'))); // Serve React build files
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'FrontEnd', 'dist', 'index.html'));
-});
 // JWT Utility Functions
 const generateToken = (payload) => {
   return jwt.sign(payload, JWT_SECRET);
@@ -2017,6 +2011,15 @@ app.get('/', (req, res) => {
 });
 // Use Multer error handling middleware
 app.use(handleMulterError);
+
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all: send index.html for any non-API route (React Router needs this)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server.js: Server is running on http://localhost:${PORT}`);
 });

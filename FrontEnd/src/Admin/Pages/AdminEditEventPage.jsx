@@ -16,13 +16,13 @@ export default function AdminEditEventPage() {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/event/${id}`);
+        const response = await fetch(`/event/${id}`);
         if (!response.ok) throw new Error('Failed to fetch event details');
         const data = await response.json();
         setEvent(data);
 
         if (data.images && data.images.length > 0) {
-          const oldPreviews = data.images.map(img => `http://localhost:3000/uploads/${img}`);
+          const oldPreviews = data.images.map(img => `/uploads/${img}`);
           setPreviews(oldPreviews);
         }
         setRemovedOldImages([]);
@@ -119,7 +119,7 @@ export default function AdminEditEventPage() {
         formData.append('preserveImages', 'true');
       }
 
-      const response = await fetch(`http://localhost:3000/updateevent/${id}`, {
+      const response = await fetch(`/updateevent/${id}`, {
         method: 'PUT',
         body: formData
       });
@@ -132,7 +132,7 @@ export default function AdminEditEventPage() {
       const remainingOld = event.images.filter(img => !removedOldImages.includes(img));
       const finalImages = newImages.length > 0 ? result.event.images : remainingOld;
       setEvent(prev => ({ ...prev, images: finalImages }));
-      setPreviews(finalImages.map(img => `http://localhost:3000/uploads/${img}`));
+      setPreviews(finalImages.map(img => `/uploads/${img}`));
       setNewImages([]);
       setRemovedOldImages([]);
     } catch (error) {

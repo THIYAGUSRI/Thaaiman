@@ -59,7 +59,7 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
 
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:3000/categorys');
+                const response = await fetch('/categorys');
                 if (!response.ok) {
                     throw new Error(`Category fetch error: ${response.status}`);
                 }
@@ -269,9 +269,9 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
     }, [dispatch, userId, products, cartItems]);
 
     const getImageUrl = useCallback((imgPath) => {
-        if (!imgPath) return 'http://localhost:3000/uploads/default-image.jpg';
+        if (!imgPath) return '/uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `http://localhost:3000/uploads/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `/uploads/${normalizedPath}`;
     }, []);
 
     const handleCardClick = useCallback((id) => {

@@ -27,7 +27,7 @@ export default function VideoDetail() {
       const fetchVideo = async () => {
         try {
           setLoading(true);
-          const response = await fetch(`http://localhost:3000/videodetail/${id}`);
+          const response = await fetch(`/videodetail/${id}`);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
           const data = await response.json();
           setVideo(data.video);

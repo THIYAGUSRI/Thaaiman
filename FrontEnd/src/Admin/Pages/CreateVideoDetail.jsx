@@ -71,7 +71,7 @@ export default function CreateVideoDetail() {
       data.append('preview', formData.preview);
       data.append('thumbnail', thumbnail);
 
-      const response = await fetch('http://localhost:3000/createvideodetail', {
+      const response = await fetch('/createvideodetail', {
         method: 'POST',
         body: data,
       });
