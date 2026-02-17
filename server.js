@@ -2005,10 +2005,7 @@ app.delete('/deletedeliverycentre/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting delivery centre', error: error.message });
   }
 });
-app.get('/', (req, res) => {
-  console.log('Server.js: Serving root endpoint');
-  res.send('Hello World!');
-});
+
 // Use Multer error handling middleware
 app.use(handleMulterError);
 
