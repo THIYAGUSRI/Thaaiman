@@ -30,7 +30,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(express.static(path.join(__dirname, 'FrontEnd/dist'))); // Serve React build files
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'FrontEnd', 'dist', 'index.html'));
 });
 // JWT Utility Functions
