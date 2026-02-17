@@ -35,7 +35,7 @@ export default function DeliverySignUp() {
     const navigate = useNavigate();
 
     // Your Google Maps API Key
-    const API_KEY = "AIzaSyBlPmq0Er-nui07EbfOEpbHCvSJNvjQsWk";
+  //  const API_KEY = "AIzaSyBlPmq0Er-nui07EbfOEpbHCvSJNvjQsWk";
 
     useEffect(() => {
         // Load Google Maps Script
