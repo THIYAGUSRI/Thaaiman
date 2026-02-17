@@ -22,7 +22,6 @@ import { fileURLToPath } from 'url';
 import { error, log } from 'console';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const _dirname = path.resolve();
 const app = express();
 dotenv.config();
 const PORT = 3000;
@@ -1495,7 +1494,7 @@ app.put('/updatedeliveryaddress/:id', async (req, res) => {
       { id },
       updatedData,
       { new: true, runValidators: true }
-    );  
+    );
     if (!address) {
       return res.status(404).json({ message: 'Delivery address not found' });
     }
@@ -2014,11 +2013,20 @@ app.get('/', (req, res) => {
 app.use(handleMulterError);
 
 
-app.use(express.static(path.join(_dirname, 'FrontEnd/dist')));
+// ────────────────────────────────────────────────
+// ALL ROUTES MUST BE ABOVE THIS BLOCK
+// ────────────────────────────────────────────────
 
-// Catch-all: send index.html for any non-API route (React Router needs this)
+// Serve the React/Vite build
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Important: catch-all route for client-side routing (React Router)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(_dirname, 'FrontEnd', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 app.listen(PORT, () => {
