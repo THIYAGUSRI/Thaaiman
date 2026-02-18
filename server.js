@@ -2014,12 +2014,12 @@ app.use(handleMulterError);
 // ALL ROUTES MUST BE ABOVE THIS BLOCK
 // ────────────────────────────────────────────────
 
-// Serve the React/Vite build
-app.use(express.static(path.join(__dirname, 'dist')));
+// Serve the React/Vite build (Frontend is inside FrontEnd folder)
+app.use(express.static(path.join(__dirname, 'FrontEnd', 'dist')));
 
 // Important: catch-all route for client-side routing (React Router)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'FrontEnd', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
