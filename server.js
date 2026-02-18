@@ -41,8 +41,6 @@ const verifyToken = (token) => {
 };
 app.use(express.json());
 app.use(cors());
-// Accept both /Uploads and /uploads (case insensitive)
-app.use(['/Uploads', '/uploads'], express.static(path.join(__dirname, 'Uploads')));// Ensure upload directory exists
 const uploadDir = 'Uploads/';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
@@ -2021,6 +2019,9 @@ app.use(handleMulterError);
 // Log paths for debugging (remove later if you want)
 console.log('__dirname:', __dirname);
 console.log('Trying to serve static from:', path.join(__dirname, 'dist'));
+
+// Uploads folder (product images)
+app.use('/Uploads', express.static(path.join(__dirname, 'Uploads')));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
