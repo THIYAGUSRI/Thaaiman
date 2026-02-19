@@ -243,17 +243,17 @@ export default function Cart() {
 
   const handleIncrease = (prod_ID, selectedRate) => {
     console.log(`Cart.js: Increasing quantity for prod_ID: ${prod_ID}, unit: ${selectedRate.key}`);
-    const item = cartItems.find((item) => 
-      item.prod_ID === prod_ID && 
+    const item = cartItems.find((item) =>
+      item.prod_ID === prod_ID &&
       item.selectedRate.key === selectedRate.key
     );
     if (item && isUserCartValid) {
-      dispatch(updateCartItem({ 
-        token, 
-        userId, 
-        prod_ID, 
-        quantity: item.quantity + 1, 
-        selectedRate: item.selectedRate 
+      dispatch(updateCartItem({
+        token,
+        userId,
+        prod_ID,
+        quantity: item.quantity + 1,
+        selectedRate: item.selectedRate
       }));
     } else {
       console.log('Cart.js: Cannot increase quantity, invalid user cart or item not found');
@@ -262,17 +262,17 @@ export default function Cart() {
 
   const handleDecrease = (prod_ID, selectedRate) => {
     console.log(`Cart.js: Decreasing quantity for prod_ID: ${prod_ID}, unit: ${selectedRate.key}`);
-    const item = cartItems.find((item) => 
-      item.prod_ID === prod_ID && 
+    const item = cartItems.find((item) =>
+      item.prod_ID === prod_ID &&
       item.selectedRate.key === selectedRate.key
     );
     if (item && item.quantity > 0 && isUserCartValid) {
-      dispatch(updateCartItem({ 
-        token, 
-        userId, 
-        prod_ID, 
-        quantity: item.quantity - 1, 
-        selectedRate: item.selectedRate 
+      dispatch(updateCartItem({
+        token,
+        userId,
+        prod_ID,
+        quantity: item.quantity - 1,
+        selectedRate: item.selectedRate
       }));
     } else {
       console.log('Cart.js: Cannot decrease quantity, invalid user cart or item not found');
@@ -471,7 +471,7 @@ export default function Cart() {
               className="inline-block bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-300"
             >
               Shop Now
-            </Link>            
+            </Link>
           </div>
         </div>
       </>
@@ -502,18 +502,18 @@ export default function Cart() {
                 <tbody>
                   {cartItems.map((item, index) => (
                     <tr key={`${item.prod_ID}-${item.selectedRate.key}`} className="border-b border-gray-200 bg-white hover:bg-gray- 50 transition duration-200">
-                      
+
                       <td className="py-4">
                         <Link to={`/product/${item.prod_ID}`}>
-                        <img
-                          src={getImageUrl(item.image)}
-                          alt={item.prod_Name}
-                          className="flex items-center content-center m-auto w-16 h-16 object-fill rounded-md"
-                        />
+                          <img
+                            src={getImageUrl(item.image)}
+                            alt={item.prod_Name}
+                            className="flex items-center content-center m-auto w-16 h-16 object-fill rounded-md"
+                          />
                         </Link>
                       </td>
-                      
-                        <td className="py-4 text-center text-lg font-semibold"><Link to={`/product/${item.prod_ID}`}>{item.prod_Name}</Link></td>                      
+
+                      <td className="py-4 text-center text-lg font-semibold"><Link to={`/product/${item.prod_ID}`}>{item.prod_Name}</Link></td>
                       <td className="py-4">
                         <div className="flex items-center justify-end w-25 h-3">
                           <div className="border border-gray-200 rounded-lg text-sm bg-gray-50 px-3 py-2 text-center font-semibold">
@@ -617,67 +617,69 @@ export default function Cart() {
                 <span>₹ {grandTotal.toFixed(2)}</span>
               </p>
             </div>
-            <div className='flex-col mb-6 pl-6 pr-6 sm:flex'>
-              <div>
-                <label className='font-bold text-lg'>Delivery Day <span className='text-red-500'>*</span></label>
-                <Select
-                  placeholder="Select Duration"
-                  indicator={<KeyboardArrowDown />}
-                  sx={{
-                    width: 167,
-                    [`& .${selectClasses.indicator}`]: {
-                      transition: '0.2s',
-                      [`&.${selectClasses.expanded}`]: {
-                        transform: 'rotate(-180deg)',
+            <div className='flex mb-6 pl-6 pr-6'>
+              <div className='flex-col sm:flex-col'>
+                <div>
+                  <label className='font-bold text-lg'>Delivery Day <span className='text-red-500'>*</span></label>
+                  <Select
+                    placeholder="Select Duration"
+                    indicator={<KeyboardArrowDown />}
+                    sx={{
+                      width: 167,
+                      [`& .${selectClasses.indicator}`]: {
+                        transition: '0.2s',
+                        [`&.${selectClasses.expanded}`]: {
+                          transform: 'rotate(-180deg)',
+                        },
                       },
-                    },
-                    marginTop: '10px',
-                    padding: '10px 10px'
-                  }}
-                  className='mr-30'
-                  value={deliveryDay}
-                  onChange={(event, value) => {
-                    setDeliveryDay(value);
-                    setValidationErrors(prev => ({ ...prev, deliveryDay: '' }));
-                  }}
-                  required
-                >
-                  {availableDays.map((day) => (
-                    <Option key={day} value={day}>{day}</Option>
-                  ))}
-                </Select>
-                {validationErrors.deliveryDay && (
-                  <p className="text-sm text-red-600 mt-1">{validationErrors.deliveryDay}</p>
-                )}
-              </div>
+                      marginTop: '10px',
+                      padding: '10px 10px'
+                    }}
+                    className='mr-30'
+                    value={deliveryDay}
+                    onChange={(event, value) => {
+                      setDeliveryDay(value);
+                      setValidationErrors(prev => ({ ...prev, deliveryDay: '' }));
+                    }}
+                    required
+                  >
+                    {availableDays.map((day) => (
+                      <Option key={day} value={day}>{day}</Option>
+                    ))}
+                  </Select>
+                  {validationErrors.deliveryDay && (
+                    <p className="text-sm text-red-600 mt-1">{validationErrors.deliveryDay}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className='font-bold text-lg'>Delivery Time <span className='text-red-500'>*</span></label>
-                <Select
-                  placeholder="Select Time Slot"
-                  indicator={<KeyboardArrowDown />}
-                  sx={{
-                    width: 167,
-                    [`& .${selectClasses.indicator}`]: {
-                      transition: '0.2s',
-                      [`&.${selectClasses.expanded}`]: {
-                        transform: 'rotate(-180deg)',
+                <div>
+                  <label className='font-bold text-lg'>Delivery Time <span className='text-red-500'>*</span></label>
+                  <Select
+                    placeholder="Select Time Slot"
+                    indicator={<KeyboardArrowDown />}
+                    sx={{
+                      width: 167,
+                      [`& .${selectClasses.indicator}`]: {
+                        transition: '0.2s',
+                        [`&.${selectClasses.expanded}`]: {
+                          transform: 'rotate(-180deg)',
+                        },
                       },
-                    },
-                    marginTop: '10px',
-                    padding: '10px 10px'
-                  }}
-                  disabled={availableTimeSlots.length === 0}
-                  value={deliveryTime}
-                  onChange={(event, value) => {
-                    setDeliveryTime(value);
-                  }}
-                  required
-                >
-                  {availableTimeSlots.map((slot) => (
-                    <Option key={slot} value={slot}>{slot}</Option>
-                  ))}
-                </Select>
+                      marginTop: '10px',
+                      padding: '10px 10px'
+                    }}
+                    disabled={availableTimeSlots.length === 0}
+                    value={deliveryTime}
+                    onChange={(event, value) => {
+                      setDeliveryTime(value);
+                    }}
+                    required
+                  >
+                    {availableTimeSlots.map((slot) => (
+                      <Option key={slot} value={slot}>{slot}</Option>
+                    ))}
+                  </Select>
+                </div>
               </div>
             </div>
             {validationErrors.deliveryTime && (
@@ -709,7 +711,7 @@ export default function Cart() {
                 defaultValue={(deliveryCentres.length > 0 ? deliveryCentres[0].deliveryNickName : '')}
                 required
               >
-                { deliveryCentres.length > 0 ? (
+                {deliveryCentres.length > 0 ? (
                   deliveryCentres.map((centre) => (
                     <Option key={centre.id} value={centre.deliveryNickName}>
                       {centre.deliveryNickName}
@@ -717,7 +719,7 @@ export default function Cart() {
                   ))
                 ) : (
                   <Option value="" disabled>Loading delivery centres...</Option>
-                )}                
+                )}
               </Select>
               {validationErrors.direction && (
                 <p className="text-sm text-red-600 mt-1">{validationErrors.direction}</p>
