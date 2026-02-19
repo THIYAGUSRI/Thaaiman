@@ -617,7 +617,7 @@ export default function Cart() {
                 <span>₹ {grandTotal.toFixed(2)}</span>
               </p>
             </div>
-            <div className='flex-col mb-6 pl-6 pr-6 sm:flex'>
+            <div className='flex mb-6 pl-6 pr-6 sm:flex-col'>
               <div>
                 <label className='font-bold text-lg'>Delivery Day <span className='text-red-500'>*</span></label>
                 <Select
