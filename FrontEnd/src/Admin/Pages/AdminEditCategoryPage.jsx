@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NavigationBox from '../Components/NavigationBox';
+import { useCallback } from 'react';
 
 export default function AdminEditCategoryPage() {
   const { id } = useParams();
