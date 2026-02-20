@@ -416,37 +416,37 @@ export default function Cart() {
   };
 
   const getImageUrl = useCallback((imgPath) => {
-          // Final fallback - a known working image or placeholder
-          const FALLBACK = 'https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/uploads/1765434787902-366029619.png';
-  
-          if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
-              return FALLBACK;
-          }
-  
-          const normalized = imgPath
-              .replace(/\\/g, '/')           // fix any backslashes
-              .replace(/^\/+/, '')           // remove leading slashes
-              .trim();
-  
-          // If already a full URL, keep it (in case backend sends full link sometimes)
-          if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
-              return normalized;
-          }
-  
-          // Build correct GitHub RAW URL
-          const repoOwner = 'THIYAGUSRI';
-          const repoName = 'THAAIMAN';
-          const branch = 'main';
-          const folder = 'uploads';
-  
-          // If path already includes "uploads/", don't duplicate it
-          let finalPath = normalized;
-          if (!normalized.toLowerCase().startsWith('uploads/')) {
-              finalPath = `${folder}/${normalized}`;
-          }
-  
-          return `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${finalPath}`;
-      }, []);
+    // Final fallback - a known working image or placeholder
+    const FALLBACK = 'https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/uploads/1765434787902-366029619.png';
+
+    if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
+      return FALLBACK;
+    }
+
+    const normalized = imgPath
+      .replace(/\\/g, '/')           // fix any backslashes
+      .replace(/^\/+/, '')           // remove leading slashes
+      .trim();
+
+    // If already a full URL, keep it (in case backend sends full link sometimes)
+    if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+      return normalized;
+    }
+
+    // Build correct GitHub RAW URL
+    const repoOwner = 'THIYAGUSRI';
+    const repoName = 'THAAIMAN';
+    const branch = 'main';
+    const folder = 'uploads';
+
+    // If path already includes "uploads/", don't duplicate it
+    let finalPath = normalized;
+    if (!normalized.toLowerCase().startsWith('uploads/')) {
+      finalPath = `${folder}/${normalized}`;
+    }
+
+    return `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${finalPath}`;
+  }, []);
 
   if (!currentUser) {
     console.log('Cart.js: No user logged in, displaying empty cart');
@@ -643,77 +643,77 @@ export default function Cart() {
                 <span>₹ {grandTotal.toFixed(2)}</span>
               </p>
             </div>
-            <div className='mb-6 pl-6 pr-6'>
-              <div className='flex'>
-                <div>
-                  <label className='font-bold text-lg'>Delivery Day <span className='text-red-500'>*</span></label>
+            <div className="mb-6 px-4 md:px-6">
+              {/* Flex container: column on mobile, row on md+ */}
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                {/* Delivery Day Field */}
+                <div className="w-full md:flex-1">
+                  <label className="font-bold text-lg">
+                    Delivery Day <span className="text-red-500">*</span>
+                  </label>
                   <Select
                     placeholder="Select Duration"
                     indicator={<KeyboardArrowDown />}
                     sx={{
-                      width: 167,
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: '0.2s',
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: 'rotate(-180deg)',
-                        },
-                      },
+                      width: '100%',                // takes full width of its container
                       marginTop: '10px',
-                      padding: '10px 10px'
+                      padding: '10px 10px',
                     }}
-                    className='mr-30'
                     value={deliveryDay}
                     onChange={(event, value) => {
                       setDeliveryDay(value);
-                      setValidationErrors(prev => ({ ...prev, deliveryDay: '' }));
+                      setValidationErrors((prev) => ({ ...prev, deliveryDay: '' }));
                     }}
                     required
                   >
                     {availableDays.map((day) => (
-                      <Option key={day} value={day}>{day}</Option>
+                      <Option key={day} value={day}>
+                        {day}
+                      </Option>
                     ))}
-                  </Select>
-                  {validationErrors.deliveryDay && (
-                    <p className="text-sm text-red-600 mt-1">{validationErrors.deliveryDay}</p>
-                  )}
+                  </Select>                 
                 </div>
 
-                <div>
-                  <label className='font-bold text-lg'>Delivery Time <span className='text-red-500'>*</span></label>
+                {/* Delivery Time Field */}
+                <div className="w-full md:flex-1">
+                  <label className="font-bold text-lg">
+                    Delivery Time <span className="text-red-500">*</span>
+                  </label>
                   <Select
                     placeholder="Select Time Slot"
                     indicator={<KeyboardArrowDown />}
                     sx={{
-                      width: 167,
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: '0.2s',
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: 'rotate(-180deg)',
-                        },
-                      },
+                      width: '100%',
                       marginTop: '10px',
-                      padding: '10px 10px'
+                      padding: '10px 10px',
                     }}
                     disabled={availableTimeSlots.length === 0}
                     value={deliveryTime}
                     onChange={(event, value) => {
                       setDeliveryTime(value);
+                      // Clear Delivery Time error when user selects a time
+                      setValidationErrors((prev) => ({ ...prev, deliveryTime: '' }));
                     }}
                     required
                   >
                     {availableTimeSlots.map((slot) => (
-                      <Option key={slot} value={slot}>{slot}</Option>
+                      <Option key={slot} value={slot}>
+                        {slot}
+                      </Option>
                     ))}
                   </Select>
+                  {/* Error for Delivery Time */}
+                  {validationErrors.deliveryTime && (
+                    <p className="text-sm text-red-600 mt-1">{validationErrors.deliveryTime}</p>
+                  )}
+                  {/* Optional: general time slot error (if needed) */}
+                  {timeSlotError && (
+                    <p className="text-sm text-red-600 mt-1">{timeSlotError}</p>
+                  )}
                 </div>
               </div>
+              {/* If you want a global error (outside both fields), you can add it here */}
             </div>
-            {validationErrors.deliveryTime && (
-              <p className="text-sm text-red-600 mt-2 mb-2">{validationErrors.deliveryTime}</p>
-            )}
-            {timeSlotError && (
-              <p className="text-sm text-red-600 mt-2 mb-2">{timeSlotError}</p>
-            )}
             <div className='mb-6 pl-6 pr-6'>
               <label className='font-bold text-lg'>Delivery Centre <span className='text-red-500'>*</span></label>
               <Select
