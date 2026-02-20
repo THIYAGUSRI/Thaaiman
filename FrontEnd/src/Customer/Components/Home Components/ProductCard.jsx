@@ -368,9 +368,9 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
     }, [products]);
 
     const getImageUrl = useCallback((imgPath) => {
-        if (!imgPath) return '/Uploads/default-image.jpg';
+        if (!imgPath) return `${import.meta.env.IMG_URL}/uploads/default-image.jpg`;
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `${process.env.IMG_URL}/uploads/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `https://github.com/THIYAGUSRI/THAAIMAN/blob/main/uploads/${normalizedPath}`;
     }, []);
 
     const handleCardClick = useCallback((id) => {
