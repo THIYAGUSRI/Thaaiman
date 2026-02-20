@@ -107,11 +107,38 @@ export default function DeliveryHome() {
 
   const filteredOrders = orders.filter(o => o.deliveryProcess === filteredStatus);
 
-  const getImageUrl = (imgPath) => {
-    if (!imgPath) return '/Uploads/no-image.png';
-    const cleanPath = imgPath.replace(/\\/g, '/');
-    return cleanPath.startsWith('http') ? cleanPath : `/Uploads/${cleanPath}`;
-  };
+  const getImageUrl = useCallback((imgPath) => {
+          // Final fallback - a known working image or placeholder
+          const FALLBACK = 'https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/uploads/1765434787902-366029619.png';
+  
+          if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
+              return FALLBACK;
+          }
+  
+          const normalized = imgPath
+              .replace(/\\/g, '/')           // fix any backslashes
+              .replace(/^\/+/, '')           // remove leading slashes
+              .trim();
+  
+          // If already a full URL, keep it (in case backend sends full link sometimes)
+          if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+              return normalized;
+          }
+  
+          // Build correct GitHub RAW URL
+          const repoOwner = 'THIYAGUSRI';
+          const repoName = 'THAAIMAN';
+          const branch = 'main';
+          const folder = 'uploads';
+  
+          // If path already includes "uploads/", don't duplicate it
+          let finalPath = normalized;
+          if (!normalized.toLowerCase().startsWith('uploads/')) {
+              finalPath = `${folder}/${normalized}`;
+          }
+  
+          return `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${finalPath}`;
+      }, []);
 
   const openActualQtyModal = (orderId, item) => {
     setCurrentOrderId(orderId);
