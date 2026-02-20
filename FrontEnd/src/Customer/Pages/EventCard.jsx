@@ -11,6 +11,7 @@ import {
   Description as DescriptionIcon,
 } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
+import { useCallback } from 'react';
 
 export default function EventCard() {
   const [events, setEvents] = useState([]);

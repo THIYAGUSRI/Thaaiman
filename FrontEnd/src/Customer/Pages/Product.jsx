@@ -4,6 +4,7 @@ import Header from '../Components/Common Components/Header';
 import ProductCard from '../Components/Home Components/ProductCard';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material';
+import { useCallback } from 'react';
 
 export default function Product() {
     const [products, setProducts] = useState([]);

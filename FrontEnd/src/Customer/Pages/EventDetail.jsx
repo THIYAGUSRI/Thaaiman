@@ -9,6 +9,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import PlaceIcon from '@mui/icons-material/Place';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { useCallback } from 'react';
 
 export default function EventDetail() {
     const [eventDetail, setEventDetail] = useState(null);

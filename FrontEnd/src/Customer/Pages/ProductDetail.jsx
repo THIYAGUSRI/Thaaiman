@@ -14,6 +14,7 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import ProductCard from '../Components/Home Components/ProductCard';
+import { useCallback } from 'react';
 
 export default function ProductDetail() {
   const [product, setProduct] = useState({});
