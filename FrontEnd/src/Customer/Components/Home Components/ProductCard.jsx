@@ -12,8 +12,7 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { Tooltip } from '@mui/material';
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 
 export default function ProductCard({ products, onWishlistItemRemoved, disableWishlistFetch = false }) {
@@ -371,7 +370,7 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
     const getImageUrl = useCallback((imgPath) => {
         if (!imgPath) return '/Uploads/default-image.jpg';
         const normalizedPath = imgPath.replace(/\\/g, '/');
-        return normalizedPath.startsWith('http') ? normalizedPath : `/Uploads/${normalizedPath}`;
+        return normalizedPath.startsWith('http') ? normalizedPath : `${process.env.IMG_URL}/uploads/${normalizedPath}`;
     }, []);
 
     const handleCardClick = useCallback((id) => {
