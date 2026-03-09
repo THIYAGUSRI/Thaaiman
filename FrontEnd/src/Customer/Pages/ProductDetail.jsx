@@ -74,7 +74,7 @@ export default function ProductDetail() {
             const imagePath = data.prod_Images[0].image.replace(/\\/g, '/');
             const imageUrl = imagePath.startsWith('http')
               ? imagePath
-              : `/Uploads/${imagePath}`;
+              : `https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/Uploads/${imagePath}`;
             setMainImage(imageUrl);
             console.log('ProductDetail.js: Set main image:', imageUrl);
           }
