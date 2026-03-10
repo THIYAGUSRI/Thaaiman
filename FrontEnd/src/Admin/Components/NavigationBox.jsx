@@ -57,9 +57,9 @@ export default function AdminLayout({ children }) {
       title: 'Create New',
       icon: <AddBoxIcon />,
       subItems: [
-        { text: 'Create Product', link: '/createproduct' },
-        { text: 'Create Category', link: '/createcategory' },
-        { text: 'Create Event', link: '/createevent' },
+        { text: 'Create Product', link: '/createproductdetail' },
+        { text: 'Create Category', link: '/createcategorydetail' },
+        { text: 'Create Event', link: '/createeventdetail' },
         { text: 'Create Video', link: '/createvideo' },
       ],
     },

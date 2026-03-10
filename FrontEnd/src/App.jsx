@@ -62,11 +62,11 @@ export default function App() {
         <Route path='/event' element={<EventCard />} />
         <Route path='/eventdetail/:id' element={<EventDetail />} />
         {/* Admin Routes */}
-        <Route path='/adminlogin' element={<AdminSignIn />} />
+        <Route path='/adminuserlogin' element={<AdminSignIn />} />
         <Route path='/adminhome' element={<AdminHome />} />
-        <Route path='/createproduct' element={<CreateProduct />} />
-        <Route path='/createcategory' element={<CreateCategory />} />
-        <Route path='/createevent' element={<CreateEventDetail />} />
+        <Route path='/createproductdetail' element={<CreateProduct />} />
+        <Route path='/createcategorydetail' element={<CreateCategory />} />
+        <Route path='/createeventdetail' element={<CreateEventDetail />} />
         <Route path='/createvideo' element={<CreateVideoDetail />} />
         <Route path='/adminproductdetail' element={<AdminProductDetail />} />
         <Route path='/admincategorydetail' element={<AdminCategoryDetail />} />

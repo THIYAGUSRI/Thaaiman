@@ -20,7 +20,7 @@ export default function AdminHeader() {
   const handleLogout = () => {
     dispatch(signoutSuccess());
     // setMobileMenuOpen(false);
-    navigate('/adminlogin')
+    navigate('/adminuserlogin')
 
   };
 
@@ -66,7 +66,7 @@ export default function AdminHeader() {
               </div>
             ) : (
               <Link
-                to="/adminlogin"
+                to="/adminuserlogin"
                 className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium transition duration-200"
               >
                 <Login className="w-5 h-5" />
