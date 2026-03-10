@@ -9,7 +9,7 @@ export default function AdminHome() {
 
   useEffect(() => {
     if (!loading && (!currentUser || !currentUser.isAdmin)) {
-      navigate('/admin/login', { replace: true });
+      navigate('/adminuserlogin', { replace: true });
     }
   }, [currentUser, loading, navigate]);
 
