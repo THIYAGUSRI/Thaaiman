@@ -111,7 +111,7 @@ export default function Home() {
                       onClick={handleViewMore}
                       className="rounded-lg bg-gradient-to-r from-yellow-400 to-yellow-600 px-8 py-3.5 text-white font-semibold text-lg shadow-md hover:from-yellow-500 hover:to-yellow-700 hover:shadow-lg active:scale-95 transition-all duration-300"
                     >
-                      View More Products
+                      View More Products 
                     </button>
                   </div>
                 )}
