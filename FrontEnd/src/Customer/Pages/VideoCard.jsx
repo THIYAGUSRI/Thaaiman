@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Common Components/Header';
-import { useCallback } from 'react';
 
 export default function VideoCard() {
     const [videos, setVideos] = useState([]);
@@ -11,6 +10,36 @@ export default function VideoCard() {
     const hoverTimeoutRef = useRef(null);
     const navigate = useNavigate();
 
+    // ✅ Hooks must be called unconditionally at the top level
+    const getImageUrl = useCallback((imgPath) => {
+        const FALLBACK = 'https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/uploads/1765434787902-366029619.png';
+
+        if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
+            return FALLBACK;
+        }
+
+        const normalized = imgPath
+            .replace(/\\/g, '/')
+            .replace(/^\/+/, '')
+            .trim();
+
+        if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+            return normalized;
+        }
+
+        const repoOwner = 'THIYAGUSRI';
+        const repoName = 'THAAIMAN';
+        const branch = 'main';
+        const folder = 'uploads';
+
+        let finalPath = normalized;
+        if (!normalized.toLowerCase().startsWith('uploads/')) {
+            finalPath = `${folder}/${normalized}`;
+        }
+
+        return `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${finalPath}`;
+    }, []);
+
     useEffect(() => {
         const fetchVideos = async () => {
             try {
@@ -18,8 +47,6 @@ export default function VideoCard() {
                 const response = await fetch('/videodetails');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-                
-                // Handle API shape
                 setVideos(data.videos || data || []);
                 setError(null);
             } catch (error) {
@@ -47,6 +74,7 @@ export default function VideoCard() {
         navigate(`/videofulldetail/${video.id}`, { state: { video } });
     };
 
+    // ✅ Early returns come after all hooks
     if (loading) {
         return <div className="flex items-center justify-center min-h-screen text-lg">Loading videos...</div>;
     }
@@ -55,46 +83,12 @@ export default function VideoCard() {
         return <div className="flex items-center justify-center min-h-screen text-red-500 text-lg">{error}</div>;
     }
 
-    const getImageUrl = useCallback((imgPath) => {
-            // Final fallback - a known working image or placeholder
-            const FALLBACK = 'https://raw.githubusercontent.com/THIYAGUSRI/THAAIMAN/main/uploads/1765434787902-366029619.png';
-    
-            if (!imgPath || typeof imgPath !== 'string' || imgPath.trim() === '') {
-                return FALLBACK;
-            }
-    
-            const normalized = imgPath
-                .replace(/\\/g, '/')           // fix any backslashes
-                .replace(/^\/+/, '')           // remove leading slashes
-                .trim();
-    
-            // If already a full URL, keep it (in case backend sends full link sometimes)
-            if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
-                return normalized;
-            }
-    
-            // Build correct GitHub RAW URL
-            const repoOwner = 'THIYAGUSRI';
-            const repoName = 'THAAIMAN';
-            const branch = 'main';
-            const folder = 'uploads';
-    
-            // If path already includes "uploads/", don't duplicate it
-            let finalPath = normalized;
-            if (!normalized.toLowerCase().startsWith('uploads/')) {
-                finalPath = `${folder}/${normalized}`;
-            }
-    
-            return `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${finalPath}`;
-        }, []);
-
     const getYouTubeEmbedUrl = (preview) => {
-        if (!preview) return 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1'; // Fallback to a default YouTube video
-        // Extract video ID from YouTube URL or use directly if it's an ID
-        const videoId = preview.includes('youtube.com') 
-            ? preview.split('v=')[1]?.split('&')[0] 
-            : preview.includes('youtu.be') 
-            ? preview.split('/').pop().split('?')[0] 
+        if (!preview) return 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1';
+        const videoId = preview.includes('youtube.com')
+            ? preview.split('v=')[1]?.split('&')[0]
+            : preview.includes('youtu.be')
+            ? preview.split('/').pop().split('?')[0]
             : preview;
         return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
     };
@@ -119,18 +113,18 @@ export default function VideoCard() {
                                     >
                                         <div className="relative mb-2 w-full pb-[56.25%] overflow-hidden rounded-xl">
                                             {hoveredVideo === video.id ? (
-                                                <iframe 
-                                                    src={getYouTubeEmbedUrl(video.preview)} 
-                                                    className="absolute top-0 left-0 w-full h-full object-cover" 
-                                                    allow="autoplay; encrypted-media" 
+                                                <iframe
+                                                    src={getYouTubeEmbedUrl(video.preview)}
+                                                    className="absolute top-0 left-0 w-full h-full object-cover"
+                                                    allow="autoplay; encrypted-media"
                                                     allowFullScreen
                                                     title={video.title}
                                                 ></iframe>
                                             ) : (
-                                                <img 
-                                                    src={getImageUrl(video.thumbnail)} 
-                                                    alt={video.title} 
-                                                    className="absolute top-0 left-0 w-full h-full object-cover"                                                     
+                                                <img
+                                                    src={getImageUrl(video.thumbnail)}
+                                                    alt={video.title}
+                                                    className="absolute top-0 left-0 w-full h-full object-cover"
                                                 />
                                             )}
                                         </div>
