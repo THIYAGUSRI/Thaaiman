@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
     },
     userEmail: {
         type: String,
-        required: true,
         unqiue: true
     }
 },{timestamps: true});

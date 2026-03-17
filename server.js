@@ -718,7 +718,7 @@ app.post('/createuser', async (req, res) => {
   try {
     console.log('Server.js: Creating new user with data:', req.body);
     const { userName, userMobile, userEmail } = req.body;
-    if (!userName || !userMobile || !userEmail) {
+    if (!userName || !userMobile) {
       console.error('Server.js: Missing required fields for user creation');
       return res.status(400).json({ message: 'All fields are required' });
     }
