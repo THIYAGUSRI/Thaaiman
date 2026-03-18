@@ -31,7 +31,7 @@ export default function AdminDeliveryDateTime() {
     const fetchDeliveryDateTime = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/getdeliveryDateTime');
+        const response = await fetch('/getdeliveryDateTime');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
@@ -84,7 +84,7 @@ export default function AdminDeliveryDateTime() {
         lastDeliveryTime: lastDeliveryTimes[itemId] || '',
       };
 
-      const response = await fetch(`http://localhost:3000/editdeliverydatetime/${itemId}`, {
+      const response = await fetch(`/editdeliverydatetime/${itemId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
