@@ -274,6 +274,14 @@ export default function Cart() {
     };
   }, [cartItems, total, gst, deliveryCharge, discount, grandTotal, deliveryDay, deliveryTime, direction, selectedAddress, deliveryAddress]);
 
+  const handleConfirmNextWeek = () => {    
+    setShowNoMoreThisWeek(false);
+  };
+
+  const handleCancel = () => {
+    setShowNoMoreThisWeek(false);
+  };
+
   const handleIncrease = (prod_ID, selectedRate) => {
     console.log(`Cart.js: Increasing quantity for prod_ID: ${prod_ID}, unit: ${selectedRate.key}`);
     const item = cartItems.find((item) =>
