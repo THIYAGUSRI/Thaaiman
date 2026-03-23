@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 export default function Category() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
+    const scrollContainerRef = useRef(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -63,35 +66,51 @@ export default function Category() {
         navigate('/products', { state: { selectedCategory: category.categoryName } });
     };
 
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: -scrollContainerRef.current.clientWidth,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    const scrollRight = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                left: scrollContainerRef.current.clientWidth,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
-        <div className="w-full mx-auto py-20 px-4">
-            <div className="flex flex-col items-center justify-center">
+        <div className="w-full py-10 scrollbar">
+            <div className="flex justify-center">
+                <div className='flex mx-2 items-center justify-center cursor-pointer'>
+                    <KeyboardDoubleArrowLeftIcon sx={{width: '40px', height: '40px', border: '1px solid #ccc', borderRadius: '50%', padding: '5px'}}  onClick={scrollLeft} />
+                </div>
                 {/* Flex container that centers 5 items */}
-                <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl">
+                <div 
+                    ref={scrollContainerRef}
+                    className="flex gap-2 px-2 scrollbar" 
+                    style={{ maxWidth: '1440px', overflowX: 'auto', paddingBottom: '10px' }}
+                >
                     {categories.map((category, index) => (
                         <div
                             key={category._id || `category-${index}`}
-                            className="flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105"
-                            style={{
-                                flex: '0 0 auto',
-                                width: 'calc(50% - 1rem)', // 2 items per row on mobile
-                            }}
+                            className="flex flex-col rounded-xl items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105"
                             onClick={() => handleCategoryClick(category)}
                         >
                             {category.active !== false ? (
                                 <>
                                     {/* Responsive Image Container - INCREASED SIZE */}
                                     <div className="
-                                        w-30 h-30          
-                                        sm:w-35 sm:h-35   
-                                        md:w-40 md:h-40    
-                                        lg:w-45 lg:h-45    
-                                        xl:w-50 xl:h-50    
+                                        w-25 h-25                                                  
                                         rounded-full 
                                         bg-gradient-to-br from-gray-100 to-gray-200 
                                         flex items-center justify-center 
                                         overflow-hidden 
-                                        shadow-xl         
                                         border-4 border-white
                                         hover:shadow-2xl    
                                         transition-shadow duration-300
@@ -109,20 +128,19 @@ export default function Category() {
                                     </div>
 
                                     {/* Category Name - Adjusted for larger image */}
-                                    <div className="mt-4 md:mt-5 lg:mt-6 text-center px-2 max-w-full">
-                                        <h2 className="
-                                            font-bold 
-                                            text-sm 
-                                            sm:text-base 
-                                            md:text-lg 
-                                            lg:text-xl
-                                            xl:text-2xl     /* Added extra large */
+                                    <div className="text-center px-2 max-w-full">
+                                        <h2
+                                            className="
+                                            font-lora
+                                            font-bold
+                                            text-sm
                                             text-gray-800 
                                             truncate 
-                                            hover:text-blue-600 
+                                            hover:text-yellow-600 
                                             transition-colors 
                                             duration-200
-                                        ">
+                                        "
+                                        >
                                             {category.categoryName || 'Unknown'}
                                         </h2>
                                     </div>
@@ -131,30 +149,9 @@ export default function Category() {
                         </div>
                     ))}
                 </div>
-
-                {/* For tablet and larger screens - show 5 items in one row */}
-                <style>{`
-                    @media (min-width: 768px) {
-                        .flex-wrap > div {
-                            width: calc(20% - 2rem) !important; /* 5 items per row */
-                        }
-                    }
-                    
-                    @media (min-width: 640px) and (max-width: 767px) {
-                        .flex-wrap > div {
-                            width: calc(33.333% - 1.5rem) !important; /* 3 items per row */
-                        }
-                    }
-                    
-                    @keyframes float {
-                        0%, 100% { transform: translateY(0); }
-                        50% { transform: translateY(-8px); }
-                    }
-                    
-                    .hover\\:scale-105:hover {
-                        transform: scale(1.05);
-                    }
-                `}</style>
+                <div className='flex mx-2 items-center justify-center cursor-pointer'>
+                    <KeyboardDoubleArrowRightIcon sx={{width: '40px', height: '40px', border: '1px solid #ccc', borderRadius: '50%', padding: '5px'}} onClick={scrollRight} />
+                </div>
             </div>
         </div>
     );

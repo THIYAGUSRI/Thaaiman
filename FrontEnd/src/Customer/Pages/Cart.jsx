@@ -274,7 +274,7 @@ export default function Cart() {
     };
   }, [cartItems, total, gst, deliveryCharge, discount, grandTotal, deliveryDay, deliveryTime, direction, selectedAddress, deliveryAddress]);
 
-  const handleConfirmNextWeek = () => {    
+  const handleConfirmNextWeek = () => {
     setShowNoMoreThisWeek(false);
   };
 
@@ -711,7 +711,7 @@ export default function Cart() {
                         {day}
                       </Option>
                     ))}
-                  </Select>                 
+                  </Select>
                 </div>
 
                 {/* Delivery Time Field */}
@@ -829,7 +829,7 @@ export default function Cart() {
                         required
                       />
                       <label htmlFor={addr.id} className="text-sm text-gray-800 flex flex-col cursor-pointer">
-                        <span className='font-bold text-lg uppercase'>{addr.nickName}</span>
+                        <span className='font-bold text-sm uppercase'>{addr.nickName}</span>
                         {selectedAddress === addr.id && (
                           <span>
                             <span className='font-bold'>City:</span> {addr.city} | <span className='font-bold'>Mobile:</span> {addr.mobile}
@@ -864,10 +864,22 @@ export default function Cart() {
             <div className='flex mx-5 pb-6 items-center content-center'>
               <Button
                 variant="contained"
-                color="primary"
-                className='flex items-center justify-center w-full text-xl font-bold py-15'
                 onClick={handleConfirmOrder}
-                sx={{ padding: '15px 0 15px 0', fontSize: '20px', fontWeight: 'bold' }}
+                sx={{
+                  // The Gradient
+                  background: 'linear-gradient(to right, #fbbf24, #d97706)', // yellow-400 to yellow-600
+                  color: 'black',
+                  padding: '10px 0',
+                  fontSize: '17px',
+                  fontWeight: 'bold',
+                  width: '100%',
+                  textTransform: 'none', // Optional: prevents MUI from auto-capitalizing
+                  '&:hover': {
+                    // Hover Gradient
+                    background: 'linear-gradient(to right, #f59e0b, #d97706)', // yellow-500 to yellow-600
+                    boxShadow: '0px 4px 15px rgba(217, 119, 6, 0.4)', // Optional: adds a nice glow
+                  },
+                }}
               >
                 Confirm Order
               </Button>

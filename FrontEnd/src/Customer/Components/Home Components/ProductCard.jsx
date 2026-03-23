@@ -472,7 +472,7 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
             )}
 
             {(url == '/product/') ? (
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12">
+                <div className="container px-2 sm:px-4 py-12">
                     {products.map((product) => {
                         // Find cart item with BOTH product ID AND selected unit
                         const selectedRate = selectedRates[product.prod_ID] || {
@@ -509,7 +509,7 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
                         return (
                             <div
                                 key={product.prod_ID}
-                                className="w-full max-w-sm bg-white shadow-lg overflow-hidden text-center cursor-pointer transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] flex flex-col mx-auto"
+                                className="w-full max-w-md bg-white shadow-lg overflow-hidden text-center cursor-pointer transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] flex flex-col mx-auto"
                                 onClick={() => handleCardClick(product.prod_ID)}
                             >
                                 <div className='h-65'>
@@ -703,7 +703,7 @@ export default function ProductCard({ products, onWishlistItemRemoved, disableWi
                     })}
                 </div>
             ) : (
-                <div className="container mx-auto px-4 sm:px-4 lg:px-6 xl:px-8 py-12 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="container px-4 py-12 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {products.map((product) => {
                         // Find cart item with BOTH product ID AND selected unit
                         const selectedRate = selectedRates[product.prod_ID] || {

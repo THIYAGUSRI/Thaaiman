@@ -783,13 +783,13 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
-      <div className='mx-15'>
+      <div className=''>
         {showRelatedTitle && (
           <div className="mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
               Related Products
             </h2>
-            <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mx-auto w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {productsToShow.map((pro) => (
                 <div key={pro.prod_ID} className="w-full">
                   <ProductCard products={[pro]} />
